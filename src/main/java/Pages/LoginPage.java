@@ -1,6 +1,7 @@
 package Pages;
 
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
@@ -32,51 +33,51 @@ public class LoginPage {
     @FindBy(how = How.CSS, using = "body > main > div > form > div.ant-form-item.AuthForm_formItem__Eizm8.AuthForm_formItemPassword__WHfok.css-1l7cij0.ant-form-item-has-success > div > div > div > div > span > span > span")
     private SelenideElement eyeVisibleInvisible;
 
-    //Клик по глазу локатору.
+    @Step("Клик по глазу видимости")
     public void clickEyeVisibleInvisible(){eyeVisibleInvisible.click();}
-    //Получение введённого пароля из поля пароль
+    @Step("Получение введённого пароля из поля пароль")
     public boolean registrationButtonIsDisplayed() {
         return registrationButton.exists();
     }
-    //Метод получения текста из ошибки логина
+    @Step("Получение текста ошибки под полем логин")
     public String getFailedEmptyLoginMessage(){
         emptyLoginErrorMessage.shouldBe(visible);
         return emptyLoginErrorMessage.getText();
     }
-    //Метод получения текста ошибки из пароля
+    @Step("Метод получение текста ошибки под полем пароль")
     public String getFailedEmptyPasswordMessage(){
         emptyPasswordErrorMessage.shouldBe(visible);
         return emptyPasswordErrorMessage.getText();
     }
-    //Метод получения текста из поля пароль
+    @Step("Получение Value из поля пароль")
     public String getPasswordFromPasswordField(){
         passwordField.shouldBe(visible);
         return passwordField.getValue();
     }
 
 
-    //метод заполнения поля ввода логина
+    @Step("Заполнение поля логин значением {username}")
     public void setUsername(String username) {
         loginField.setValue(username);
     }
 
-    //метод заполнения поля ввода пароля
+    @Step("Заполнение поля пароль значением {password}")
     public void setPassword(String password) {
         passwordField.setValue(password);
     }
 
-    //метод клика по кнопке авторизации
+    @Step("Клик по кнопке Войти")
     public void clickSignInButton() {
         enterLoginButton.click();
     }
 
-    //метод клика по кнопке регистрации
+    @Step("Клик по кнопке Регистрация")
     public void clickRegButton() {
         registrationButton.click();
     }
 
 
-    //метод авторизации в приложении: объединяет ввод логина, пароля и клик по кнопке входа
+    @Step("Заполнение полей Логин и Пароль и клик по кнопке Войти")
     public void filLoginAndAuth(String username, String password) {
         setUsername(username);
         setPassword(password);

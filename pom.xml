@@ -44,7 +44,7 @@
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-junit4</artifactId>
-            <version>2.23.0</version>
+            <version>2.15.0</version>
             <scope>test</scope>
         </dependency>
         <!-- модуль взаимодействия Allure и Junit -->
@@ -64,6 +64,12 @@
                 <artifactId>aspectjweaver</artifactId>
                 <version>${aspectj.version}</version>
             </dependency>
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide</artifactId>
+            <version>5.23.2</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <properties>

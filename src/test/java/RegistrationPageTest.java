@@ -4,6 +4,8 @@ import Pages.RegistrationPage;
 import com.codeborne.selenide.Selenide;
 
 import io.qameta.allure.Description;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.*;
 
@@ -31,6 +33,7 @@ public class RegistrationPageTest {
     @Test
     @DisplayName("Успешная регистрация")
     @Description("Успешная регистрация с корректными данными")
+    @Severity(SeverityLevel.BLOCKER)
     public void testSuccessfulRegistration() {
         registrationPage.registration(userGenerator.login, userGenerator.password, userGenerator.password, userGenerator.lastName, userGenerator.firstName, userGenerator.middleName, userGenerator.email , userGenerator.phoneNumber);
         String actualResult = registrationPage.getErrorAuthorizationMessage();
@@ -40,6 +43,7 @@ public class RegistrationPageTest {
     @Test
     @DisplayName("Регистрация с уже зарегистрированным логином")
     @Description("Регистрация с уже зарегистрированным логином, но остальные данные корректны")
+    @Severity(SeverityLevel.BLOCKER)
     public void testRegistrationWithExistingLogin() {
         registrationPage.registration(EXISTED_LOGIN,  userGenerator.password, userGenerator.password, userGenerator.lastName, userGenerator.firstName, userGenerator.middleName, userGenerator.email , userGenerator.phoneNumber);
         String actualResult = registrationPage.getErrorAuthorizationMessage();
@@ -48,6 +52,7 @@ public class RegistrationPageTest {
 
     @Test
     @DisplayName("Регистрация с уже зарегистрированным Email")
+    @Severity(SeverityLevel.BLOCKER)
     public void testRegistrationWithExistingEmail() {
         registrationPage.registration(userGenerator.login, userGenerator.password, userGenerator.password, userGenerator.lastName, userGenerator.firstName, userGenerator.middleName, EXISTED_EMAIL, userGenerator.phoneNumber);
         String actualResult = registrationPage.getErrorAuthorizationMessage();
@@ -56,6 +61,8 @@ public class RegistrationPageTest {
 
     @Test
     @DisplayName("Регистрация с уже зарегистрированным номером телефона")
+    @Description("Регистрация с уже зарегистрированным номером телефона, но остальные данные корректны")
+    @Severity(SeverityLevel.BLOCKER)
     public void testRegistrationWithExistingPhone() {
         registrationPage.registration(userGenerator.login ,userGenerator.password, userGenerator.password, userGenerator.lastName, userGenerator.firstName, userGenerator.middleName, userGenerator.email , EXISTED_PHONE);
         String actualResult = registrationPage.getErrorAuthorizationMessage();
@@ -64,6 +71,8 @@ public class RegistrationPageTest {
 
     @Test
     @DisplayName("Регистрация с некорректным повторением пароля")
+    @Description("Регистрация с уже некорректным повторением пароля, но остальные данные корректны")
+    @Severity(SeverityLevel.CRITICAL)
     public void testInvalidRepeatPasswords() {
         registrationPage.registration(userGenerator.login, userGenerator.password, " ", userGenerator.lastName, userGenerator.firstName, userGenerator.middleName, userGenerator.email , userGenerator.phoneNumber);
         String actualResult = registrationPage.getErrorPasswordMessage();
@@ -72,6 +81,8 @@ public class RegistrationPageTest {
 
     @Test
     @DisplayName("Регистрация с пустым полем номера телефона")
+    @Description("Регистрация с пустым полем номера телефона, но остальные данные корректны")
+    @Severity(SeverityLevel.CRITICAL)
     public void testMissingPhoneField() {
         registrationPage.registration(userGenerator.login, userGenerator.password, userGenerator.password, userGenerator.lastName, userGenerator.firstName, userGenerator.middleName, userGenerator.email , " ");
         String actualResult = registrationPage.getErrorPhoneMessage();
@@ -80,6 +91,8 @@ public class RegistrationPageTest {
 
     @Test
     @DisplayName("Регистрация с пустым полем пароля")
+    @Description("Регистрация с пустым полем пароль, но остальные данные корректны")
+    @Severity(SeverityLevel.CRITICAL)
     public void testMissingPasswordFields() {
         registrationPage.registration(userGenerator.login, " ", userGenerator.password, userGenerator.lastName, userGenerator.firstName, userGenerator.middleName, userGenerator.email , userGenerator.phoneNumber);
         String actualResult = registrationPage.getErrorPasswordMessage();
@@ -87,6 +100,8 @@ public class RegistrationPageTest {
     }
     @Test
     @DisplayName("Регистрация без установленной галочки подписки на Email сообщения")
+    @Description("Регистрация без установленной галочки подписки на Email сообщения, но остальные поля корректно заполненны")
+    @Severity(SeverityLevel.CRITICAL)
     public void testMissingCheckBoxEmail() {
         registrationPage.clickEmailRegistrationCheckBox();
         registrationPage.registration(userGenerator.login, userGenerator.password, userGenerator.password, userGenerator.lastName, userGenerator.firstName, userGenerator.middleName, userGenerator.email , userGenerator.phoneNumber);
@@ -94,6 +109,8 @@ public class RegistrationPageTest {
     }
     @Test
     @DisplayName("Регистрация без установленной галочки на пользовательское соглашение")
+    @Description("Регистрация без установленной галочки у пользовательского соглашения, но остальные поля корректно заполненны")
+    @Severity(SeverityLevel.CRITICAL)
     public void testMissingCheckBoxAgreement() {
         registrationPage.clickPersonalAgreementCheckBox();
         registrationPage.registration(userGenerator.login, userGenerator.password, userGenerator.password, userGenerator.lastName, userGenerator.firstName, userGenerator.middleName, userGenerator.email , userGenerator.phoneNumber);
@@ -101,6 +118,8 @@ public class RegistrationPageTest {
     }
     @Test
     @DisplayName("Кнопка глаза показывает пароль и возможно получить пароль через getValue")
+    @Description("Нажатие на кнопку глаза делает видимым поле пароль и появляется возможность сделать getValue")
+    @Severity(SeverityLevel.TRIVIAL)
     public void testPasswordVisabilityRegistrationTest(){
         registrationPage.setPasswordField("123456");
         registrationPage.clickEyeVisibleInvisible();

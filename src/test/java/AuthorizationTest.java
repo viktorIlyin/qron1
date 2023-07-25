@@ -4,6 +4,10 @@ import Pages.LoginPage;
 import Pages.RegistrationPage;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
+import io.qameta.allure.Description;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -32,6 +36,9 @@ public class AuthorizationTest {
     }
     //Тест с корректным логином и паролем
     @Test
+    @DisplayName("Успешная авторизация")
+    @Description("Успешная авторизация с корректными данными логин и пароль")
+    @Severity(SeverityLevel.BLOCKER)
     public void testSuccessfulAuthorizationWithCorrectData() {
         loginPage.filLoginAndAuth(CORRECT_LOGIN, CORRECT_PASSWORD);
         String actualResult = lkPage.getSuccessAuthorizationMessage();
@@ -39,6 +46,9 @@ public class AuthorizationTest {
     }
     //Тест с корректным логином и рандомным паролем
     @Test
+    @DisplayName("Неудачная авторизация")
+    @Description("Неудачная авторизация с корректным логином и некорректным паролем")
+    @Severity(SeverityLevel.CRITICAL)
     public void testAuthorizationWithIncorrectPassword() {
         loginPage.filLoginAndAuth(CORRECT_LOGIN, userGenerator.password);
         String actualResult = lkPage.getSuccessAuthorizationMessage();
@@ -46,6 +56,9 @@ public class AuthorizationTest {
     }
     //Тест с некорректным логином и корректным паролем
     @Test
+    @DisplayName("Неудачная авторизация")
+    @Description("Неудачная авторизация с корректным паролем и некорректным логином")
+    @Severity(SeverityLevel.MINOR)
     public void testAuthorizationWithIncorrectLogin() {
         loginPage.filLoginAndAuth(userGenerator.login, CORRECT_PASSWORD);
         String actualResult = lkPage.getSuccessAuthorizationMessage();
@@ -53,24 +66,36 @@ public class AuthorizationTest {
     }
     //Тест на попытку авторизации без пароля
     @Test
+    @DisplayName("Неудачная авторизация")
+    @Description("Неудачная авторизация с корректным логином и пустым полем пароля")
+    @Severity(SeverityLevel.CRITICAL)
     public void testAuthorizationWithoutPassword() {
         loginPage.filLoginAndAuth(CORRECT_LOGIN,"");
         String actualResult = loginPage.getFailedEmptyPasswordMessage();
         Assert.assertEquals("Пустой пароль", "Введите пароль", actualResult);
     }
     @Test
+    @DisplayName("Неудачная авторизация")
+    @Description("Неудачная авторизация с пустым логином и корректным паролем")
+    @Severity(SeverityLevel.MINOR)
     public void testAuthorizationWithoutLogin() {
         loginPage.filLoginAndAuth("",CORRECT_PASSWORD);
         String actualResult = loginPage.getFailedEmptyLoginMessage();
-        Assert.assertEquals("Пустой пароль", "Введите логин", actualResult);
+        Assert.assertEquals("Пустой логин", "Введите логин", actualResult);
     }
 
     @Test
+    @DisplayName("Неудачная авторизация")
+    @Description("Неудачная авторизация с корректным логином и некорректным паролем")
+    @Severity(SeverityLevel.CRITICAL)
     public void testClickRegistrationButton(){
         loginPage.clickRegButton();
         Assert.assertTrue("Кнопка не найдена", registrationPage.registrationButtonIsDisplayed());
     }
     @Test
+    @DisplayName("Проверка глаза у поля пароль")
+    @Description("Нажатие на кнопку глаза делает видимым поле пароль и появляется возможность сделать getValue")
+    @Severity(SeverityLevel.TRIVIAL)
     public void testPasswordAuthorizationVisabilityTest(){
         loginPage.setPassword("123456");
         loginPage.clickEyeVisibleInvisible();

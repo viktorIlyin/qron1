@@ -18,5 +18,5 @@ public class UserGenerator {
     public String email = faker.internet().emailAddress();
     // Генерируем случайную строку с цифрами, маленькими и большими буквами, и специальными символами
     int passwordLength = faker.random().nextInt(8, 17); // Генерируем случайную длину пароля от 8 до 16 символов
-    public String password = RandomStringUtils.random(passwordLength, true, true) + faker.lorem().characters(2, 4, true, true);
+    public String password = RandomStringUtils.random(passwordLength, true, true) + RandomStringUtils.randomNumeric(1) + faker.lorem().characters(2, 4, true, true);
 }

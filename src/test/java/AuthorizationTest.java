@@ -5,6 +5,7 @@ import Pages.RegistrationPage;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
 import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.junit4.DisplayName;
@@ -36,6 +37,7 @@ public class AuthorizationTest {
     }
     //Тест с корректным логином и паролем
     @Test
+    @Epic("Авторизация")
     @DisplayName("Успешная авторизация")
     @Description("Успешная авторизация с корректными данными логин и пароль")
     @Severity(SeverityLevel.BLOCKER)

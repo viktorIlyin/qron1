@@ -3,7 +3,9 @@ import Pages.LkPage;
 import Pages.RegistrationPage;
 import com.codeborne.selenide.Selenide;
 
+import com.codeborne.selenide.WebDriverRunner;
 import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.junit4.DisplayName;
@@ -24,6 +26,7 @@ public class RegistrationPageTest {
     @Before
     public void setUp() {
         open(REGISTRATION_PAGE_URL);
+        WebDriverRunner.getWebDriver().manage().window().maximize();
         registrationPage = page(RegistrationPage.class);
         lkPage = page(LkPage.class);
         userGenerator = page(UserGenerator.class);
@@ -31,6 +34,7 @@ public class RegistrationPageTest {
     }
 
     @Test
+    @Epic("Регистрация")
     @DisplayName("Успешная регистрация")
     @Description("Успешная регистрация с корректными данными")
     @Severity(SeverityLevel.BLOCKER)

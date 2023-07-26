@@ -100,7 +100,4 @@ public class HomePage {
         return seventhQuestion.getText();
     }
 
-
-
-
 }

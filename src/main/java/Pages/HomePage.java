@@ -42,10 +42,16 @@ public class HomePage {
     private SelenideElement sixthQuestionText;
     @FindBy(how = How.CSS, using = "#faq > div.Accordion_item__x0Qr_.Accordion_itemOpen__sA1SZ.dark\\:bg-gray-900.bg-gray-200 > p")
     private SelenideElement seventhQuestionText;
+    //Локаторы кнопок подробнее в карточках компаний
+    @FindBy(how = How.CSS, using = "body > main > div > div.AboutUs_aboutUs__5q2q7 > div.AboutUs_block__JZlQ9 > div:nth-child(1) > a")
+    private SelenideElement medokButtonNavigation;
 
 
+    @Step("Клик по кнопке подробнее в карточке МедОк онлайн")
+    public void clickMedokButtonNavigation(){
+        medokButtonNavigation.click();
+    }
 
-    @Step("Клик по кнопке Войти")
     public void clickOnEnterButton() {
         enterButton.click();
     }
@@ -99,5 +105,6 @@ public class HomePage {
     public String seventhQuestionGetText(){
         return seventhQuestion.getText();
     }
+
 
 }

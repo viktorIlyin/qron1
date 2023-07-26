@@ -1,8 +1,6 @@
 import DataGenerator.UserGenerator;
-import Pages.HomePage;
-import Pages.LkPage;
-import Pages.LoginPage;
-import Pages.RegistrationPage;
+import Pages.*;
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
 import io.qameta.allure.Description;
@@ -15,6 +13,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import static com.codeborne.selenide.Condition.appear;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.page;
 
@@ -34,7 +33,6 @@ public class SplitPageTest {
         lkPage = page(LkPage.class);
         userGenerator = page(UserGenerator.class);
         homePage = page(HomePage.class);
-
     }
     @After
     public void tearDown() {

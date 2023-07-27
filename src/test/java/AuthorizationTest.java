@@ -104,6 +104,7 @@ public class AuthorizationTest {
         String actualResult = loginPage.getPasswordFromPasswordField();
         Assert.assertEquals("Пароль показан", "123456", actualResult);
     }
+
     @After
     public void tearDown() {
         // Закрытие браузера после каждого теста

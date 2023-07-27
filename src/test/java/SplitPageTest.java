@@ -1,6 +1,6 @@
 import DataGenerator.UserGenerator;
 import Pages.*;
-import com.codeborne.selenide.Condition;
+
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
 import io.qameta.allure.Description;
@@ -12,10 +12,13 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static com.codeborne.selenide.Condition.appear;
-import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.Selenide.page;
+import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.WebDriverConditions.*;
+
+
 
 public class SplitPageTest {
     private static RegistrationPage registrationPage;
@@ -42,6 +45,45 @@ public class SplitPageTest {
         Selenide.clearBrowserCookies();
         Selenide.clearBrowserLocalStorage();
         Selenide.closeWebDriver();
+    }
+    @Test
+    @DisplayName("Клик на кнопку Подробнее в панели МедОк")
+    @Description("Клик на кнопку Подробнее в панели МедОК переход на сайт МедОк и проверка URL")
+    public void checkPageNavigationMedOk() throws InterruptedException {
+        homePage.clickMedokButtonNavigation();
+        // Ждем появления второй вкладки и переключаемся на нее
+        WebDriverWait wait = new WebDriverWait(WebDriverRunner.getWebDriver(), 10);
+        wait.until(ExpectedConditions.numberOfWindowsToBe(2));
+        WebDriverRunner.getWebDriver().switchTo().window(WebDriverRunner.getWebDriver().getWindowHandles().toArray()[1].toString());
+        // Получаем URL Медка
+        String currentUrl = WebDriverRunner.getWebDriver().getCurrentUrl();
+        Assert.assertEquals("https://mismedok.ru/", currentUrl);
+    }
+    @Test
+    @DisplayName("Клик на кнопку Подробнее в панели Accor")
+    @Description("Клик на кнопку Подробнее в панели Accor переход на сайт Accor и проверка URL")
+    public void checkPageNavigationAccor() throws InterruptedException {
+        homePage.clickAccorButtonNavigation();
+        // Ждем появления второй вкладки и переключаемся на нее
+        WebDriverWait wait = new WebDriverWait(WebDriverRunner.getWebDriver(), 10);
+        wait.until(ExpectedConditions.numberOfWindowsToBe(2));
+        WebDriverRunner.getWebDriver().switchTo().window(WebDriverRunner.getWebDriver().getWindowHandles().toArray()[1].toString());
+        // Получаем URL Медка
+        String currentUrl = WebDriverRunner.getWebDriver().getCurrentUrl();
+        Assert.assertEquals("https://all.accor.com/russia/index.ru.shtml", currentUrl);
+    }
+    @Test
+    @DisplayName("Клик на кнопку Подробнее в панели Властелин")
+    @Description("Клик на кнопку Подробнее в панели Властелин переход на сайт Властелин и проверка URL")
+    public void checkPageNavigationVlastelin() throws InterruptedException {
+        homePage.clickVlastelinButtonNavigation();
+        // Ждем появления второй вкладки и переключаемся на нее
+        WebDriverWait wait = new WebDriverWait(WebDriverRunner.getWebDriver(), 10);
+        wait.until(ExpectedConditions.numberOfWindowsToBe(2));
+        WebDriverRunner.getWebDriver().switchTo().window(WebDriverRunner.getWebDriver().getWindowHandles().toArray()[1].toString());
+        // Получаем URL Медка
+        String currentUrl = WebDriverRunner.getWebDriver().getCurrentUrl();
+        Assert.assertEquals("https://vlastelinavto.ru/", currentUrl);
     }
     @Test
     @Epic("Проверка дизайна")
@@ -94,4 +136,5 @@ public class SplitPageTest {
         homePage.clickSeventhQuestion();
         Assert.assertEquals("Да, обычно для использования сплитов Вам нужен инвайт (приглашение). Однако, доступ к сплитам можно получить без инвайта, обратившись в службу поддержки по номеру телефона + 8 800 300 84 90 или написав на почту info@qronclub.ru.", homePage.seventhQuestionGetText());
     }
+
 }

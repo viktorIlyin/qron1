@@ -102,20 +102,20 @@ public class HomePage {
 
     @Step("Получить текст из ответа на четвёртый вопрос")
     public String fourthQuestionGetText(){
-        return fourthQuestion.getText();
+        return fourthQuestionText.getText();
     }
 
     @Step("Получить текст из ответа на пятый вопрос")
     public String fifthQuestionGetText(){
-        return fifthQuestion.getText();
+        return fifthQuestionText.getText();
     }
     @Step("Получить текст из ответа на шестой вопрос")
     public String sixthQuestionGetText(){
-        return sixthQuestion.getText();
+        return sixthQuestionText.getText();
     }
     @Step("Получить текст из ответа на седьмой вопрос")
     public String seventhQuestionGetText(){
-        return seventhQuestion.getText();
+        return seventhQuestionText.getText();
     }
 
 
